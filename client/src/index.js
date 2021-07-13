@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -21,9 +21,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 ReactDOM.render(
-  <BrowserRouter>
-    <GlobalStyle />
-    <App />
-  </BrowserRouter>,
+  <React.StrictMode>
+    <Router>
+      <GlobalStyle />
+      <App />
+    </Router>
+  </React.StrictMode>,
   document.getElementById("root")
 );
