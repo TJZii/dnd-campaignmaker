@@ -4,12 +4,35 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles";
 
-export const NavBar = () => {
-  return (
-    <div>
+export const NavBar = (props) => {
+
+  console.log(props.loggedIn)
+
+  if(props.loggedIn){
+    return (
+      <div>
+        <h1>Hello {props.user.name}</h1>
       
-    </div>
-  )
+        <br/>
+
+
+        {/* <Link to="/logout"><button>Log Out</button></Link> */}
+
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <br/>
+        
+        <Link to="/login"><button>Log In</button></Link>
+
+        <br/>
+
+        <Link to="/signup"><button>Create Account</button></Link>
+      </div>
+    )
+  }
 }
 
 // function NavBar({ user, setUser }) {
