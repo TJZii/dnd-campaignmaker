@@ -1,7 +1,5 @@
-// import { c } from 'keyboard-key'
 import React, {useState, useEffect } from 'react'
 import PlaylistForm from './PlaylistForm'
-import { Link } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import SongForm from './SongForm';
 
@@ -170,14 +168,13 @@ const Playlists = (props) => {
                     <br/>
                     <button onClick={returnView}>Return to Playlists</button>
                     <ul>
-
-                        {listSongs}
-                        <br/><br/><br/>
                         {songFormFlag ?
                             <SongForm addSong={addSong}/>
                             :
                             <button onClick={()=> setSongFlag(true)}>Add Song</button> 
                         }
+                        <br/><br/><br/>
+                        {listSongs}
                     </ul>
                     
                 </div>
