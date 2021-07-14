@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react'
 
-const PlaylistForm = (addPlaylist) => {
+const PlaylistForm = ({addPlaylist}) => {
     const [name, setName] = useState("")
   
     const handleSubmit = (e) => {

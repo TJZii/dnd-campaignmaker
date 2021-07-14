@@ -78,7 +78,7 @@ class SongsController < ApplicationController
     end
 
     def song_params
-        params.permit(:id, :name, :url, :playlist_id)
+        params.permit(:id, :name, :url, :playlist_id, :artist, :song)
     end
 
 end
