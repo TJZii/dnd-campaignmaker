@@ -3,7 +3,7 @@ import React from 'react'
 const Home = () => {
     return (
         <div >
-            <h3>Song Lister Home Page... Welcome!</h3>
+            <h3>Playlist Maker Home Page... Welcome!</h3>
         </div>
     )
 }

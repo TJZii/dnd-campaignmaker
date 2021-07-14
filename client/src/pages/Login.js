@@ -1,59 +1,49 @@
 import { useState } from "react";
-import styled from "styled-components";
-import LoginForm from "../components/LoginForm";
 import Signup from "../components/Signup";
-import { Button } from "../styles";
+import { useHistory } from "react-router-dom";
+import { Button, Error, Input, FormField, Label, Textarea } from "../styles";
 
-function Login({ onLogin }) {
-  const [showLogin, setShowLogin] = useState(true);
+const Login = ({ loginUser }) => {
+  const [name, setName] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: name,
+        password: password
+      })
+    })
+    .then(res => res.json())
+    .then(user => loginUser(user))
+  }
 
   return (
-    <Wrapper>
-      <Logo>Reciplease</Logo>
-      {showLogin ? (
-        <>
-          <LoginForm onLogin={onLogin} />
-          <Divider />
-          <p>
-            Don't have an account? &nbsp;
-            <Button color="secondary" onClick={() => setShowLogin(false)}>
-              Sign Up
-            </Button>
-          </p>
-        </>
-      ) : (
-        <>
-          <Signup onLogin={onLogin} />
-          <Divider />
-          <p>
-            Already have an account? &nbsp;
-            <Button color="secondary" onClick={() => setShowLogin(true)}>
-              Log In
-            </Button>
-          </p>
-        </>
-      )}
-    </Wrapper>
-  );
+    <form onSubmit={handleSubmit}>
+      <label>Name: </label>
+      <input 
+        type="text"
+        id="name"
+        value={name}
+        autoComplete="off"
+        onChange={(e) => setName(e.target.value)}
+      />      
+      <br/>
+      <label>Password: </label>
+      <input 
+        type="password"
+        id="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />   
+      <br/>
+      <input type="submit"/>
+    </form>
+  )
 }
-
-const Logo = styled.h1`
-  font-family: "Permanent Marker", cursive;
-  font-size: 3rem;
-  color: deeppink;
-  margin: 8px 0 16px;
-`;
-
-const Wrapper = styled.section`
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 16px;
-`;
-
-const Divider = styled.hr`
-  border: none;
-  border-bottom: 1px solid #ccc;
-  margin: 16px 0;
-`;
-
 export default Login;
