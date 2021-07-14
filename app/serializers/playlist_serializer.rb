@@ -1,3 +1,5 @@
 class PlaylistSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :user_id
+
+  has_many :songs
 end

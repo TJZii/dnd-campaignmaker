@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Button, Error, Input, FormField, Label, Textarea } from "../styles";
+// import { useHistory } from "react-router-dom";
+// import { Button, Error, Input, FormField, Label, Textarea } from "../styles";
 
 const Signup = ({loginUser}) => {
 
