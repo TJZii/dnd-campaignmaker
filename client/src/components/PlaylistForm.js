@@ -5,18 +5,8 @@ const PlaylistForm = (addPlaylist) => {
   
     const handleSubmit = (e) => {
       e.preventDefault()
-      fetch("/playlists", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
+      addPlaylist({
           name: name
-        })
-      })
-      .then(res => res.json())
-      .then(data => {
-
       })
     }
   

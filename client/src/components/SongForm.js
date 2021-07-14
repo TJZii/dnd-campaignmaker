@@ -1,10 +1,10 @@
 import React from 'react'
 
-const PlaylistsList = () => {
+const SongForm = () => {
     return (
         <div>
             
         </div>
     )
 }
-export default PlaylistsList
+export default SongForm

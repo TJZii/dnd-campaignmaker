@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Signup from "./Signup";
 import Playlists from "./Playlists";
+import SongList from "../pages/SongList";
 
 function App(props) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -50,6 +51,7 @@ function App(props) {
         <Route exact path="/signup" render={routerProps => <Signup {...routerProps} loginUser={loginUser}/> }/>
         <Route exact path="/playlistlist" render={routerProps => <Playlists {...routerProps} user={user} loggedIn={loggedIn}/>}/>
         <Route exact path="/login" render={routerProps => <Login {...routerProps} loginUser={loginUser}/> }/>
+        <Route exact path="/playlistlist/:name" render={routerProps => <SongList {...routerProps} user={user} loggedIn={loggedIn}/>}/>
       </Switch>
     </div>
   );

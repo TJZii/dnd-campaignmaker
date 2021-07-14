@@ -1,10 +1,9 @@
-// import { c } from 'keyboard-key'
 import React, {useState, useEffect } from 'react'
-import PlaylistForm from './PlaylistForm'
-import { Link } from 'react-router-dom';
+import Song from '../components/Song'
+import SongForm from '../components/SongForm'
 
-const Playlists = (props) => {
-    const [playlists, setPlaylists] = useState([])
+const SongList = () => {
+    const [songs, setSongs] = useState([])
     const [error, setError] = useState("")
     const [formFlag, setFlag] = useState(false)
 
@@ -17,7 +16,7 @@ const Playlists = (props) => {
                 if(data.error){
                     setError(data.error)
                 } else {
-                    setPlaylists(data)
+                    setSongs(data)
                 }
             } else {
                 setError("Not Authorized")
@@ -36,35 +35,35 @@ const Playlists = (props) => {
         .then(res =>res.json())
         .then(data => {
             console.log(data)
-            setPlaylists([...playlists, data])
+            setSongs([...songs, data])
             setFlag(false)
         })
     }
 
-    const deletePlaylist = (playlistTarget) => {
-        fetch(`/playlists/${playlistTarget}`, {
-            method: "DELETE"
-        })
-        .then(() => {
-            let newlist = playlists.filter(p => p.id !== playlistTarget)
-            setPlaylists(newlist)
-        })
-        .catch(error => console.log(error))
-    }
+    // const deletePlaylist = (playlistTarget) => {
+    //     fetch(`/playlists/${playlistTarget}`, {
+    //         method: "DELETE",
+    //         headers: {
+    //         'Content-type': 'application/json'
+    //         }
+    //     })
+    //     .then(res => res.json())
+    //     .then(setPlaylists([playlists.filter(p => p.id !== playlistTarget)]))
+    //     .catch(error => console.log(error))
+    // }
     
 
-    const listPlaylists = playlists.map(p =>    <div key={p.id}>
-                                                    <Link  to={`playlistlist/${p.name}`}>
+    const listPlaylists = songs.map(s =>    <div key={s.id}>
+                                                    <li>
                                                         <h2>
-                                                            {p.name}
-                                                            <br/>
-                                                            Songs: {p.songs.length}
+                                                            {s.name}
+                                                            
                                                         </h2>
-                                                    </Link>
-                                                    <button onClick={() => deletePlaylist(p.id)}>Delete</button>
+                                                    </li>
+                                                    <button >Delete</button>
                                                     <br/>
                                                 </div>)
-// 
+// onClick={() => deletePlaylist(p.id)}
 
     if(error === ''){
         return (
@@ -73,7 +72,7 @@ const Playlists = (props) => {
                     {listPlaylists}
                     <br/><br/><br/>
                     {formFlag ?
-                        <PlaylistForm addPlaylist={addPlaylist}/>
+                        <SongForm addPlaylist={addPlaylist}/>
                         :
                         <button onClick={()=> setFlag(true)}>Add Playlist</button> 
                     }
@@ -87,4 +86,4 @@ const Playlists = (props) => {
     }
 
 }
-export default Playlists
+export default SongList
