@@ -4,7 +4,7 @@ const Home = () => {
     return (
         <div >
             <br/>
-            <h1>Playlist Maker Home Page... Welcome!</h1>
+            <h1>This is the Playlist Maker Home Page... Welcome!</h1>
         </div>
     )
 }

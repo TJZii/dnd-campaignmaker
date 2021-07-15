@@ -14,10 +14,25 @@ class PlaylistsController < ApplicationController
         render json: playlist
     end
 
+    def update
+        user = User.find_by(id: session[:user_id])
+        if user
+            playlist = user.playlists.find_by(id: playlist_params[:id])
+            if playlist
+                playlist.update(playlist_params)
+                render json: playlist
+            else
+                render json: { error: "Playlist not found" }, status: :not_found
+            end
+        else
+            render json: { errors: ["Not authorized"]}, status: :unauthorized
+        end
+    end
+
     def destroy
         user = User.find_by(id: session[:user_id])
         if user
-            playlist = Playlist.find_by(id: playlist_params[:id])
+            playlist = user.playlists.find_by(id: playlist_params[:id])
             if playlist
                 playlist.destroy
                 head :no_content

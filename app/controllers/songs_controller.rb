@@ -5,7 +5,7 @@ class SongsController < ApplicationController
     def index
         user = User.find_by(id: session[:user_id])
         if user
-            playlist = Playlist.find_by(id: song_params[:playlist_id])
+            playlist = user.playlists.find_by(id: song_params[:playlist_id])
             if playlist
                 render json: playlist.songs
             else
@@ -19,7 +19,7 @@ class SongsController < ApplicationController
     def create
         user = User.find_by(id: session[:user_id])
         if user
-            playlist = Playlist.find_by(id: song_params[:playlist_id])
+            playlist = user.playlists.find_by(id: song_params[:playlist_id])
             if playlist
                 song = playlist.songs.create(song_params)
                 render json: song
@@ -34,9 +34,9 @@ class SongsController < ApplicationController
     def update
         user = User.find_by(id: session[:user_id])
         if user
-            playlist = Playlist.find_by(id: song_params[:playlist_id])
+            playlist = user.playlists.find_by(id: song_params[:playlist_id])
             if playlist
-                song = Song.find_by(id: song_params[:id])
+                song = playlist.songs.find_by(id: song_params[:id])
                 if song
                     song.update(song_params)
                     render json: song
@@ -54,9 +54,9 @@ class SongsController < ApplicationController
     def destroy
         user = User.find_by(id: session[:user_id])
         if user
-            playlist = Playlist.find_by(id: song_params[:playlist_id])
+            playlist = user.playlists.find_by(id: song_params[:playlist_id])
             if playlist
-                song = Song.find_by(id: song_params[:id])
+                song = playlist.songs.find_by(id: song_params[:id])
                 if song
                     song.destroy
                     head :no_content

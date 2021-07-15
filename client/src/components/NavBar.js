@@ -9,9 +9,9 @@ const NavBar = (props) => {
   if(props.loggedIn){
     return (
       <div>
-        <h1>Hello {props.user.name}!</h1> 
+        <h1>Hello {props.user.name}! Welcome to your playlist hub!</h1> 
         <Link to="/"><button>Home</button></Link>
-        <Link to="/playlistlist"><button>Your Playlists</button></Link>
+        <Link to="/playlists"><button>Your Playlists</button></Link>
         <br/>
         <br/>
         <button onClick={props.logoutUser}>Log Out</button>
@@ -20,6 +20,8 @@ const NavBar = (props) => {
   } else {
     return (
       <div>
+
+        <h1>Please log in or create an account.</h1>
         <br/>
         
         <Link to="/login"><button>Log In</button></Link>

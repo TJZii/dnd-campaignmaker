@@ -10,6 +10,7 @@ import SongList from "../pages/SongList";
 function App(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  const [targetPlaylist, setTargetPlaylist] = useState('')
   const history = useHistory();
 
   useEffect(() => {
@@ -43,15 +44,21 @@ function App(props) {
     history.push('/')
   }
 
+  const readyPing = (id) => {
+      setTargetPlaylist(id)
+  }
+
   return (
     <div className="App">
       <NavBar user={user} loggedIn={loggedIn} logoutUser={logoutUser}/>
       <Switch>
         <Route exact path="/" component={Home}></Route>
         <Route exact path="/signup" render={routerProps => <Signup {...routerProps} loginUser={loginUser}/> }/>
-        <Route path="/playlistlist" render={routerProps => <Playlists {...routerProps} user={user} loggedIn={loggedIn}/>}/>
+        <Route exact path="/playlists" render={routerProps => <Playlists {...routerProps} user={user} loggedIn={loggedIn} readyPing={readyPing}/>}/>
         <Route exact path="/login" render={routerProps => <Login {...routerProps} loginUser={loginUser}/> }/>
-        <Route exact path="/playlistlist/:name" render={routerProps => <SongList {...routerProps} user={user} loggedIn={loggedIn}/>}/>
+        {/* <Route path="/playlists/:playlist_id" render={routerProps => <SongList {...routerProps} user={user} loggedIn={loggedIn}/>}/> */}
+        {/* <Route path={`/playlists/${targetPlaylist}/songs`} render={routerProps => <SongList {...routerProps} user={user} loggedIn={loggedIn} targetPlaylist={targetPlaylist}/>}/> */}
+        <Route path={`/playlists/:playlist_id/songs`} render={routerProps => <SongList {...routerProps} user={user} loggedIn={loggedIn} targetPlaylist={targetPlaylist}/>}/>
       </Switch>
     </div>
   );
