@@ -72,7 +72,7 @@ class SongsController < ApplicationController
     end
 
     def longestSong
-        song = Song.all.sort{|x,y| x.name.length <=> y.name.length}.last
+        song = Song.all.sort{|a,b| a.name.length <=> b.name.length}.last
         render json: song
     end
 
