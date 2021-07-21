@@ -3,19 +3,16 @@ class PlaylistsController < ApplicationController
     before_action :authorize
 
     def index 
-        user = User.find_by(id: session[:user_id])
         playlists = user.playlists
         render json: playlists
     end
 
     def create
-        user = User.find_by(id: session[:user_id])
         playlist = user.playlists.create(playlist_params)
         render json: playlist
     end
 
     def update
-        user = User.find_by(id: session[:user_id])
         if user
             playlist = user.playlists.find_by(id: playlist_params[:id])
             if playlist
@@ -30,7 +27,6 @@ class PlaylistsController < ApplicationController
     end
 
     def destroy
-        user = User.find_by(id: session[:user_id])
         if user
             playlist = user.playlists.find_by(id: playlist_params[:id])
             if playlist
@@ -46,6 +42,10 @@ class PlaylistsController < ApplicationController
 
 
     private
+
+    def user
+        User.find_by(id: session[:user_id])
+    end
 
     def playlist_params
         params.permit(:id, :name)

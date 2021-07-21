@@ -12,6 +12,7 @@ const NavBar = (props) => {
         <h1>Hello {props.user.name}! Welcome to your playlist hub!</h1> 
         <Link to="/"><button>Home</button></Link>
         <Link to="/playlists"><button>Your Playlists</button></Link>
+        <Link to="/longestSong"><button>Longest Song Name</button></Link>
         <br/>
         <br/>
         <button onClick={props.logoutUser}>Log Out</button>

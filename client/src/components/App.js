@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Router, Switch, useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Signup from "./Signup";
 import Playlists from "./Playlists";
 import SongList from "../pages/SongList";
+import LongestSongName from "./LongestSongName";
 
 function App(props) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -59,6 +60,7 @@ function App(props) {
         {/* <Route path="/playlists/:playlist_id" render={routerProps => <SongList {...routerProps} user={user} loggedIn={loggedIn}/>}/> */}
         {/* <Route path={`/playlists/${targetPlaylist}/songs`} render={routerProps => <SongList {...routerProps} user={user} loggedIn={loggedIn} targetPlaylist={targetPlaylist}/>}/> */}
         <Route path={`/playlists/:playlist_id/songs`} render={routerProps => <SongList {...routerProps} user={user} loggedIn={loggedIn} targetPlaylist={targetPlaylist}/>}/>
+        <Route exact path="/longestSong" render={routerProps => <LongestSongName {...routerProps}/>}/>
       </Switch>
     </div>
   );

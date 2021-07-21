@@ -47,7 +47,7 @@ class SongsController < ApplicationController
                 render json: { error: "Playlist not found" }, status: :not_found
             end
         else
-            render json: { errors: ["Not authorized"]}, status: :unauthorized
+            render json: { errors: "Not authorized"}, status: :unauthorized
         end
     end
 
@@ -67,8 +67,13 @@ class SongsController < ApplicationController
                 render json: { error: "Playlist not found" }, status: :not_found
             end
         else
-            render json: { errors: ["Not authorized"]}, status: :unauthorized
+            render json: { errors: "Not authorized"}, status: :unauthorized
         end
+    end
+
+    def longestSong
+        song = Song.all.sort{|x,y| x.name.length <=> y.name.length}.last
+        render json: song
     end
 
     private
