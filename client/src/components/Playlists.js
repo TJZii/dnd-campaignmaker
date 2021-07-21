@@ -77,7 +77,7 @@ const Playlists = (props) => {
     }
     
 
-    const listPlaylists = playlists.map(p =>  <div key={p.id}>
+    const listPlaylists = playlists.sort((a, b) => a.name.localeCompare(b.name)).map(p =>  <div key={p.id}>
         <h1>
             {p.name}
             <br/>
