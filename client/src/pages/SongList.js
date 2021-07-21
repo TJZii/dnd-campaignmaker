@@ -55,7 +55,7 @@ const SongList = (props) => {
         .catch(error => console.log(error))
     }
 
-    const listSongs = songs.map(s => <div key={s.id}>
+    const listSongs = songs.sort((a, b) => a.name.localeCompare(b.name)).map(s => <div key={s.id}>
         <h2>
             {s.name} - {s.artist} - 
             <button onClick={() => deleteSong(s.id)}>Delete</button>
